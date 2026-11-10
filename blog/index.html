@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Analytics 4 (async, non-render-blocking) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2JJMGW6K9W"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-2JJMGW6K9W');
+</script>
+<title>Blog — Jugal Sheth | The Data Factory</title>
+<meta name="description" content="Practical lessons from production data systems — what breaks, why it breaks, and how to check your own. Written by Jugal Sheth, Senior AI Data Engineer in New York City.">
+<link rel="canonical" href="https://jugalsheth.com/blog/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blog — Jugal Sheth | The Data Factory">
+<meta property="og:description" content="Practical lessons from production data systems — what breaks, why it breaks, and how to check your own.">
+<meta property="og:url" content="https://jugalsheth.com/blog/">
+<meta property="og:site_name" content="Jugal Sheth — The Data Factory">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Blog — Jugal Sheth | The Data Factory">
+<meta name="twitter:description" content="Practical lessons from production data systems — what breaks, why it breaks, and how to check your own.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#F6F1E7;--panel:#FFFDF8;--ink:#1C1917;--muted:#6E675C;--line:#E7DFCE;--accent:#C96F4A;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px}
+  header{padding:28px 0 8px}
+  .brand{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .brand a{color:var(--ink)}
+  .brand a:hover{color:var(--accent);text-decoration:none}
+  nav{margin-top:10px;font-size:14px}
+  nav a{margin-right:18px;color:var(--muted)}
+  nav a:hover{color:var(--accent)}
+  h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:44px;line-height:1.05;margin:28px 0 12px}
+  .lede{font-size:18px;color:var(--muted);margin:0 0 8px}
+  .rule{border:0;border-top:1px solid var(--line);margin:32px 0}
+  .kicker{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  article.post{padding:26px 0;border-top:1px solid var(--line)}
+  article.post:first-of-type{border-top:0}
+  article.post h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:28px;line-height:1.15;margin:8px 0 6px}
+  article.post h2 a{color:var(--ink)}
+  article.post h2 a:hover{color:var(--accent);text-decoration:none}
+  .meta{font-size:13px;color:var(--muted);margin:0 0 8px}
+  .summary{margin:0;font-size:16px}
+  .readmore{font-size:14px;font-weight:600}
+  .soon{color:var(--muted);font-size:15px;padding:8px 0 4px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:24px 0 40px;font-size:14px;color:var(--muted)}
+  footer a{margin-right:18px}
+  @media (max-width:560px){h1{font-size:34px}article.post h2{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><a href="https://jugalsheth.com/">Jugal Sheth</a> &nbsp;·&nbsp; The Data Factory</div>
+    <nav>
+      <a href="https://jugalsheth.com/">Portfolio</a>
+      <a href="https://the-delta.mailerpage.io/">THE DELTA</a>
+      <a href="https://www.linkedin.com/in/jugal-sheth/">LinkedIn</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Blog</h1>
+    <p class="lede">Practical lessons from production data systems — what breaks, why it breaks, and how to check your own.</p>
+    <hr class="rule">
+
+    <article class="post">
+      <div class="kicker">Production lessons</div>
+      <h2><a href="/blog/approval-queue-lying/">The Approval Queue Was Lying</a></h2>
+      <p class="meta">Nov 9, 2026 &nbsp;·&nbsp; 6 min read</p>
+      <p class="summary">Every job was green. Every pipeline run succeeded. And about 15% of the purchase orders waiting for approval were invisible to the people supposed to approve them — because an INNER JOIN on a cross-system ID silently drops the rows that don't match.</p>
+      <p><a class="readmore" href="/blog/approval-queue-lying/">Read the article →</a></p>
+    </article>
+
+    <p class="soon">More lessons from production systems are on the way — one principle, one real failure, one checklist at a time.</p>
+  </main>
+
+  <footer>
+    <a href="https://jugalsheth.com/">← Back to the portfolio</a>
+    <a href="https://the-delta.mailerpage.io/">THE DELTA newsletter</a>
+    <a href="/sitemap.xml">Sitemap</a>
+    <p style="margin:12px 0 0">© 2026 Jugal Sheth · New York City</p>
+  </footer>
+</div>
+</body>
+</html>
