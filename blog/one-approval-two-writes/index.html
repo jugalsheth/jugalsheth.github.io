@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Analytics 4 (async, non-render-blocking) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2JJMGW6K9W"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-2JJMGW6K9W');
+</script>
+<title>One Approval, Two Writes — Jugal Sheth</title>
+<meta name="description" content="An approver clicked approve once. The system triggered the write function twice. A 90-day audit found about one in four approved requisitions triggered the ERP write twice — because a dedupe ID built from the current time deduplicates nothing.">
+<link rel="canonical" href="https://jugalsheth.com/blog/one-approval-two-writes/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="One Approval, Two Writes">
+<meta property="og:description" content="A deduplication ID that is unique every time deduplicates nothing. If one approval can reach the write function through two paths, it eventually will.">
+<meta property="og:url" content="https://jugalsheth.com/blog/one-approval-two-writes/">
+<meta property="og:site_name" content="Jugal Sheth — The Data Factory">
+<meta property="article:published_time" content="2026-11-09">
+<meta property="article:author" content="Jugal Sheth">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="One Approval, Two Writes">
+<meta name="twitter:description" content="A deduplication ID that is unique every time deduplicates nothing. If one approval can reach the write function through two paths, it eventually will.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "One Approval, Two Writes",
+  "description": "An approver clicked approve once. The system triggered the write function twice. A 90-day audit found about one in four approved requisitions triggered the ERP write twice — because a dedupe ID built from the current time deduplicates nothing.",
+  "author": {"@type": "Person", "name": "Jugal Sheth", "url": "https://jugalsheth.com/"},
+  "datePublished": "2026-11-09",
+  "dateModified": "2026-11-09",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://jugalsheth.com/blog/one-approval-two-writes/"},
+  "publisher": {"@type": "Person", "name": "Jugal Sheth", "url": "https://jugalsheth.com/"}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#F6F1E7;--panel:#FFFDF8;--ink:#1C1917;--muted:#6E675C;--line:#E7DFCE;--accent:#C96F4A;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px}
+  header{padding:28px 0 8px}
+  .brand{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .brand a{color:var(--ink)}
+  .brand a:hover{color:var(--accent);text-decoration:none}
+  nav{margin-top:10px;font-size:14px}
+  nav a{margin-right:18px;color:var(--muted)}
+  nav a:hover{color:var(--accent)}
+  .kicker{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:42px;line-height:1.08;margin:16px 0 10px}
+  .byline{font-size:14px;color:var(--muted);margin:0 0 8px}
+  .principle{font-size:18px;line-height:1.6;background:var(--panel);border-left:3px solid var(--accent);padding:16px 20px;margin:24px 0}
+  h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:26px;line-height:1.2;margin:36px 0 10px}
+  p{margin:0 0 16px}
+  code{font-family:"JetBrains Mono",monospace;font-size:.88em;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+  ol,ul{margin:0 0 16px;padding-left:24px}
+  li{margin-bottom:10px}
+  li strong{font-weight:600}
+  hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+  .closing{font-size:18px;line-height:1.6}
+  .sources{font-size:14px;color:var(--muted)}
+  .sources h2{font-size:20px}
+  .sources code{font-size:.85em}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:24px 0 40px;font-size:14px;color:var(--muted)}
+  footer a{margin-right:18px}
+  @media (max-width:560px){h1{font-size:32px}h2{font-size:22px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><a href="https://jugalsheth.com/">Jugal Sheth</a> &nbsp;·&nbsp; The Data Factory</div>
+    <nav>
+      <a href="/blog/">← All articles</a>
+      <a href="https://jugalsheth.com/">Portfolio</a>
+      <a href="https://the-delta.mailerpage.io/">THE DELTA</a>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <div class="kicker">Production lessons</div>
+      <h1>One Approval, Two Writes</h1>
+      <p class="byline">Jugal Sheth &nbsp;·&nbsp; Nov 9, 2026 &nbsp;·&nbsp; 6 min read</p>
+
+      <p class="principle"><strong>The principle: a deduplication ID that is unique every time deduplicates nothing. If one approval can reach the write function through two paths, it eventually will — and the worker has to be the last line of defense.</strong></p>
+
+      <p>One click. Two invocations.</p>
+
+      <p>An approver clicked approve once. The system triggered the write function twice.</p>
+
+      <p>A 90-day audit of the logs found that about one in four approved requisitions triggered the ERP write function twice. The approvers saw nothing wrong. The jobs were green. The orders went through.</p>
+
+      <p>That is the failure mode. Not a crash. A system doing the same work twice and calling it success.</p>
+
+      <h2>How it was found</h2>
+
+      <p>We run an internal procurement app. An approver approves a requisition, and the system hands it off to the ERP to create the purchase order.</p>
+
+      <p>The audit was a routine reliability check: 90 days of logs for the write function. What it found was not an event. It was a pattern.</p>
+
+      <p>Duplicate invocations — and almost all of them arrived through two doors at once: the queue and the API gateway, for the same approval. One business action, two triggers, two runs through the creation logic.</p>
+
+      <p>Each duplicate run was a second attempt at the same write — the system had no strong gate before the external call. Nothing had exploded yet. That was the scary part. Nothing had to explode for this to be broken.</p>
+
+      <h2>The mechanism</h2>
+
+      <p>Four layers. Each one alone looks harmless.</p>
+
+      <p><strong>First, two doors in.</strong> The approval route sent a message to the queue — and it also had a fallback that called the write function directly through the API gateway. The fallback was a safety net, there in case the queue path failed. But nothing stopped both from running for the same approval. A safety net that fires alongside the main path is not a safety net. It is a second trigger.</p>
+
+      <p><strong>Second, the dedupe ID was a timestamp.</strong> The queue was FIFO with deduplication. Deduplication works by giving each message an ID: identical IDs inside a window collapse into one delivery. The ID was built from the current time — <code>Date.now()</code> — so every message looked brand new. The dedupe window had nothing to collapse. The queue was doing exactly what it was told. It was told wrong.</p>
+
+      <p>A dedupe ID built from the current time is not a dedupe ID. It is a serial number.</p>
+
+      <p><strong>Third, the worker didn't check first.</strong> The function that writes to the ERP didn't reliably ask whether a purchase order already existed for that requisition before writing one. So a duplicate invocation became a duplicate write attempt. The queue was supposed to prevent the duplicate. The worker was supposed to catch whatever got through. Neither had been given the information to do its job.</p>
+
+      <p><strong>Fourth, retries were invisible.</strong> Only terminal failures surfaced in the logs on many paths. The attempts in between were missing. So the system could run the same write twice and leave a log trail that looked like a single clean failure — or a single clean success. Support spent more time proving what happened than fixing it.</p>
+
+      <p>And this was the same handoff that had already failed twice. A week earlier, the same pipeline had silently dropped work under burst traffic. A month before that, the same write path failed because item IDs arrived as decimal strings — "425.00000" instead of "425" — and the ERP rejected them.</p>
+
+      <p>Different symptoms, same handoff: the place where an approval becomes a write in an external system is where the system keeps lying, because it is the place with the most moving parts and the least visibility.</p>
+
+      <h2>The fix</h2>
+
+      <p>Four changes, in the order that matters.</p>
+
+      <p><strong>1. One trigger path.</strong> User-facing approval flows use the queue only. The API gateway fallback is gone from the normal path. The admin fix-and-retry direct path stays — deliberately, as the recovery flow, not as a second trigger for normal approvals. One business action, one door in.</p>
+
+      <p><strong>2. Stable dedupe IDs.</strong> Built from the business key: the requisition plus the action. Same approval, same ID, every time. Now the queue's dedupe window has something to collapse. The dedupe ID finally means what its name says.</p>
+
+      <p><strong>3. A pre-create check in the worker.</strong> Before any write, the worker looks up the warehouse record for the requisition. If a purchase order already exists, it skips. If one is already in progress, it waits and rechecks once. The gate sits before the external call, not after it. A check after the write is a report. A check before the write is a safeguard.</p>
+
+      <p><strong>4. An atomic claim before the write.</strong> The worker marks the requisition in-progress in a single atomic step before calling the ERP, so two overlapping runs can't both slip through the gap between checking and writing. And every log line now carries a correlation ID, with retry attempts logged at the point they happen — so the next incident can be reconstructed from the logs instead of from memory.</p>
+
+      <h2>What it bought — and what it didn't prove yet</h2>
+
+      <p>The fix was validated with safe tests that deliberately never touch the ERP: an empty payload, fake requisitions through both the queue-shaped and API-shaped paths, and a completed requisition that correctly skipped instead of writing again.</p>
+
+      <p>But none of those tests prove the full success path. A real end-to-end test needs real writes, and that hasn't happened. The monitoring window is two weeks, with a target of near-zero duplicates. And the fix prevents new duplicates — it doesn't clean up historical ones. That work is separate, and still open.</p>
+
+      <p>I am writing that down because it matters. The fix is real. The proof is partial. A draft that pretends otherwise would be the same kind of lie the pipeline told.</p>
+
+      <h2>What to check in your own system</h2>
+
+      <p>If you run anything where one user action triggers a write in an external system — and you do — these are worth an afternoon:</p>
+
+      <ol>
+        <li><strong>Count the doors in.</strong> For each business action, list every path that can start the write. If there is a fallback, ask when both can fire. A fallback that can run alongside the main path is a second trigger with a reassuring name.</li>
+        <li><strong>Read your dedupe ID.</strong> If it contains a timestamp, a random value, or anything unique per attempt, it dedupes nothing. Build it from the business key — the thing you are protecting — so the same action always produces the same ID.</li>
+        <li><strong>Put a gate before the external write.</strong> Check whether the thing already exists before you create it. The check has to happen before the call, not after. The gate has to live in the worker too. The queue is a filter; the worker is the last line of defense.</li>
+        <li><strong>Claim before you write.</strong> Mark the work in-progress atomically, in the same step as the check, so two overlapping runs can't both pass the gate. A check without a claim is a race condition with a polite name.</li>
+        <li><strong>Make retries visible.</strong> Log every attempt. If you only log the final failure, you can't reconstruct what happened to one record from the logs. Then you don't have observability. You have a log file.</li>
+      </ol>
+
+      <h2>The lesson</h2>
+
+      <p class="closing">A queue with deduplication feels safe. It is safe only if the ID means something.</p>
+
+      <p class="closing">Build the ID from the thing you're protecting. Give the worker a gate before the write. And count the duplicates — because the system will not tell you it's doing the work twice. It will just do it, quietly, and call it success.</p>
+    </article>
+
+    <hr>
+    <div class="sources">
+      <h2>Sources</h2>
+      <p>Numbers in this article, traced to the work they came from (internal counts deliberately left out of the body):</p>
+      <ul>
+        <li><strong>Roughly a quarter of approved requisitions triggered the write function twice; 90-day audit window</strong> — corpus file 019 (ADR-010, 2026-04-14). The exact internal counts behind the rate are internal-only and were not used in the article body.</li>
+        <li><strong>Dual trigger via queue + API gateway; dedupe IDs built from <code>Date.now()</code>; no pre-create idempotency check; atomic in-progress claim; correlation IDs; two-week monitoring window with near-zero target; admin fix-and-retry path kept as intentional exception</strong> — corpus file 019.</li>
+        <li><strong>Silent failures under burst traffic a week earlier (restrictive concurrency cap, no gateway logging, dead-letter queue with no app feedback loop)</strong> — corpus file 018 (incident summary, 2026-04-08).</li>
+        <li><strong>Item IDs arriving as decimal strings ("425.00000") failing ERP PO creation a month earlier; fix was one idempotent normalize helper at every read/write boundary</strong> — corpus file 013 (ADR-003, 2026-03-10).</li>
+      </ul>
+      <p>No company or client names, internal table/procedure names, requisition identifiers, or commit SHAs appear in this article. No detail was invented: the validation limits (safe tests only, no real ERP writes; historical duplicates not retroactively repaired) are stated in corpus file 019, sections 6 and 8.</p>
+    </div>
+
+    <hr>
+    <p style="color:var(--muted)">Enjoyed this? I write one short, practical data engineering lesson every day in <a href="https://the-delta.mailerpage.io/">THE DELTA</a>.</p>
+  </main>
+
+  <footer>
+    <a href="/blog/">← Back to all articles</a>
+    <a href="https://jugalsheth.com/">Portfolio</a>
+    <a href="https://the-delta.mailerpage.io/">THE DELTA newsletter</a>
+    <p style="margin:12px 0 0">© 2026 Jugal Sheth · New York City</p>
+  </footer>
+</div>
+</body>
+</html>
